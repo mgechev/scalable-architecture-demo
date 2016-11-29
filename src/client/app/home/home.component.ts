@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { GameModel } from '../shared/models/game.model';
-import { AppComponent } from '../app.component';
 import { RoomConfig } from '../config/config';
 
 import 'rxjs/add/operator/scan';
@@ -18,25 +19,25 @@ import 'rxjs/add/operator/take';
   templateUrl: 'home.component.html'
 })
 export class HomeComponent {
-  parent: string;
+  partner: string;
   name: string;
 
-  constructor(private _game: GameModel, private _roomConfig: RoomConfig, private _parent: AppComponent) {}
+  constructor(private _game: GameModel, private _roomConfig: RoomConfig, private _router: Router) {}
 
   startGame() {
     this._roomConfig.name = this.name;
     this._roomConfig.isInitiator = true;
-    this.navigateTo('multi-player');
+    this._router.navigate(['multi-player']);
   }
+
   joinGame() {
-    this._roomConfig.name = this.parent;
+    this._roomConfig.name = this.partner;
     this._roomConfig.isInitiator = false;
-    this.navigateTo('multi-player');
+    this._router.navigate(['multi-player']);
   }
+
   hasGames() {
-    return this._game.games$.scan((accum: boolean, game: any) => (accum || !!game.size), false);
-  }
-  navigateTo(page: string) {
-    this._parent.navigateTo(page);
+    return this._game.games$
+      .scan((accum: boolean, game: any) => (accum || !!game.size), false);
   }
 }

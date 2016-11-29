@@ -46,6 +46,8 @@ export class ProjectConfig extends SeedConfig {
       path: 'node_modules/simple-peer/simplepeer.min.js'
     }]);
 
+    this.PLUGIN_CONFIGS['browser-sync'].ghostMode = false;
+
     // Add packages (e.g. lodash)
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'lodash',

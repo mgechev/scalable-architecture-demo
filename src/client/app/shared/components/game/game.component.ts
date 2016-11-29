@@ -17,7 +17,7 @@ import 'rxjs/add/operator/scan';
     <section [hidden]="(invalid() | async)">
       <sd-timer #timer></sd-timer>
       <div class="game" #gameContainer>
-        <div class="game-text">{{text}}</div>
+        <div class="game-text">{{ text }}</div>
         <textarea #textArea (keyup)="changeHandler($event.target.value)"></textarea>
       </div>
     </section>
@@ -54,8 +54,8 @@ export class GameComponent implements AfterViewInit {
 
   changeHandler(data: string) {
     if (this.text === data) {
-      this.end.emit(this.timer.time);
       this._model.completeGame(this.timer.time, this.text);
+      this.end.emit(this.timer.time);
       this.timer.reset();
     } else {
       this._model.onProgress(data);
@@ -70,6 +70,8 @@ export class GameComponent implements AfterViewInit {
   reset() {
     this.timer.reset();
     this.text = '';
+    this.textArea.nativeElement.value = '';
+    this._renderer.setElementClass(this.gameContainer.nativeElement, 'wrong', false);
   }
 
   invalid() {

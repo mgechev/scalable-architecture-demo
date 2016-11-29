@@ -9,17 +9,22 @@ import { Observer } from 'rxjs/Observer';
 export class TimerComponent {
   time: number = 0;
   timer: Observable<number>;
-  private interval: any;
+  private _interval: any;
+  private _observer: Observer<number>;
 
   reset() {
+    if (this._observer) {
+      this._observer.next(0);
+    }
     this.time = 0;
-    clearInterval(this.interval);
+    clearInterval(this._interval);
   }
 
   start() {
     this.timer = new Observable<number>((observer: Observer<number>) => {
+      this._observer = observer;
       observer.next(this.time);
-      this.interval = setInterval(() => {
+      this._interval = setInterval(() => {
         this.time += 10;
         observer.next(this.time);
       }, 10);

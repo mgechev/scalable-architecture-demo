@@ -17,7 +17,8 @@ export const registerCommandBuilder = (action: string, command: CommandBuilder) 
 export const buildP2PCommand = (action: Action) => {
   const type = action.type;
   if (builders.has(type)) {
-    return builders.get(type).bind(null, action.payload);
+    return builders.get(type)
+      .bind(null, action.payload);
   }
   return null;
 };

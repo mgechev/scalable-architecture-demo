@@ -1,5 +1,5 @@
 <div [hidden]="!gamePlayed">
-  <sd-game [hidden]="!gameEnabled" [text]="text" (end)="gameCompleted($event)"></sd-game>
+  <sd-game *ngIf="gameEnabled" [text]="text" (end)="gameCompleted($event)"></sd-game>
   <div [hidden]="gameEnabled">
     <h1>Completed!</h1>
     <section>

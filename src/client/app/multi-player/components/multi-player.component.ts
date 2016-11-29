@@ -24,13 +24,27 @@ const WSConfig: WebSocketGatewayConfig = {
 };
 
 const providers: Provider[] = [
+
+  // Here we override the AsyncService multi-provider and
+  // introduce the GameP2PService service.
+  // This way we're using both GameServer and
+  // GameP2PService and so the user can send progress to both
+  // the application server and the user she is connected with.
+  { provide: AsyncService, multi: true, useClass: GameServer },
+  { provide: AsyncService, multi: true, useClass: GameP2PService },
+
+  // Without lazy-loading it doesn't matter where we declare
+  // the WebRTCGateway, Gateway and WS_CONFIG. However, notice that
+  // these provider are required by the GameP2PService
+  // so they should be available in the part of the component tree where
+  // we want to render the MultiPlayerComponent.
   { provide: Gateway, useClass: WebRTCGateway },
   { provide: WebRTCGateway, useExisting: Gateway },
   { provide: WS_CONFIG, useValue: WSConfig },
+
+  GameModel,
   WebSocketGateway,
-  { provide: AsyncService, multi: true, useClass: GameServer },
-  { provide: AsyncService, multi: true, useClass: GameP2PService },
-  GameModel, P2PGameModel
+  P2PGameModel
 ];
 
 @Component({

@@ -8,7 +8,7 @@ You can either play <strong (click)="navigateTo('/single-player')">single player
 
 Enter your name for a new game: <input type="text" [(ngModel)]="name"><button (click)="startGame()">Start!</button><br><br>
 
-Enter name of the partner: <input type="text" [(ngModel)]="parent"><button (click)="joinGame()">Join!</button>
+Enter name of the partner: <input type="text" [(ngModel)]="partner"><button (click)="joinGame()">Join!</button>
 
 <div *ngIf="hasGames() | async">
   <h2>Your statistics:</h2>

@@ -86,7 +86,7 @@ export class WebRTCGateway extends Gateway {
   }
 
   private _addHandlers() {
-    this._peer = new Peer({ initiator: this._provider.isInitiator });
+    this._peer = new (Peer as any)({ initiator: this._provider.isInitiator });
     this._peer.on('signal', (data: any) => {
       this._signal({
         type: 'signal',
