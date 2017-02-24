@@ -14,7 +14,7 @@ import 'rxjs/add/operator/take';
   styles: [`
     strong {
       cursor: pointer;
-    } 
+    }
   `],
   templateUrl: 'home.component.html'
 })
@@ -24,7 +24,11 @@ export class HomeComponent {
 
   constructor(private _game: GameModel, private _roomConfig: RoomConfig, private _router: Router) {}
 
-  startGame() {
+  startSinglePlayerGame() {
+    this._router.navigate(['single-player']);
+  }
+
+  startMultiPlayerGame() {
     this._roomConfig.name = this.name;
     this._roomConfig.isInitiator = true;
     this._router.navigate(['multi-player']);

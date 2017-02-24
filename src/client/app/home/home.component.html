@@ -2,11 +2,11 @@
 
 <h3>Single player</h3>
 
-You can either play <strong (click)="_router.navigate(['/single-player'])">single player</strong>.
+You can either play <strong (click)="startSinglePlayerGame()">single player</strong>.
 
 <h3>Multi-player</h3>
 
-Enter your name for a new game: <input type="text" [(ngModel)]="name"><button (click)="startGame()">Start!</button><br><br>
+Enter your name for a new game: <input type="text" [(ngModel)]="name"><button (click)="startMultiPlayerGame()">Start!</button><br><br>
 
 Enter name of the partner: <input type="text" [(ngModel)]="partner"><button (click)="joinGame()">Join!</button>
 
