@@ -32,9 +32,11 @@ export class GameModel extends Model {
   }
 
   completeGame(time: number, text: string) {
-    const action = GameActions.completeGame(time, text);
-    this._store.dispatch(action);
-    this.performAsyncAction(action)
-      .subscribe(() => console.log('Done!'));
+    this._store.dispatch(GameActions.completeGame(time, text));
+    this.performAsyncAction(GameActions.completeGame(new Date(), text))
+      .subscribe(
+        () => console.log('Done!'),
+        () => console.log('Done cheating!')
+      );
   }
 }

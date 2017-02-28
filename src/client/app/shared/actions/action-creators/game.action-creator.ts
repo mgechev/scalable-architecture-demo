@@ -5,7 +5,7 @@ import {
 } from '../game.actions';
 
 export const GameActions = {
-  completeGame(time: number, text: string): Action {
+  completeGame(time: any, text: string): Action {
     return {
       payload: { text, time },
       type: COMPLETE_GAME
