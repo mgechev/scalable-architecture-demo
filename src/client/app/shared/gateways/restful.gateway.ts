@@ -18,8 +18,8 @@ export class RestfulGateway extends Gateway {
 
   send(command: RestfulCommand): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
-      const currentText = (command as any).text;
-      const currentTime = new Date((command as any).time);
+      const currentText = (command.payload as any).text;
+      const currentTime = new Date((command.payload as any).time);
 
       let status = 200;
       if (currentText.length - this._lastText.length > 10 && currentTime.getTime() - this._lastTime.getTime() < 2000) {
