@@ -5,14 +5,14 @@ import {
 } from '../game.actions';
 
 export const GameActions = {
-  completeGame(time: any, text: string): Action {
+  completeGame(text: string, time: number): Action {
     return {
       payload: { text, time },
       type: COMPLETE_GAME
     };
   },
 
-  gameProgress(text: string, time: Date): Action {
+  gameProgress(text: string, time: number): Action {
     return {
       payload: { text, time },
       type: GAME_PROGRESS

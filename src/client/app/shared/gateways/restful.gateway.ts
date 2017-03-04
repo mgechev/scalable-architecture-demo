@@ -14,15 +14,15 @@ import { Gateway } from './base.gateway';
 @Injectable()
 export class RestfulGateway extends Gateway {
   private _lastText = '';
-  private _lastTime = new Date();
+  private _lastTime = 0;
 
   send(command: RestfulCommand): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       const currentText = (command.payload as any).text;
-      const currentTime = new Date((command.payload as any).time);
+      const currentTime = (command.payload as any).time;
 
       let status = 200;
-      if (currentText.length - this._lastText.length > 10 && currentTime.getTime() - this._lastTime.getTime() < 2000) {
+      if (currentText.length - this._lastText.length > 10 && currentTime - this._lastTime < 2000) {
         status = 403;
       }
 

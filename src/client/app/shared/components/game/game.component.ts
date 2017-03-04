@@ -54,11 +54,11 @@ export class GameComponent implements AfterViewInit {
 
   changeHandler(data: string) {
     if (this.text === data) {
-      this._model.completeGame(this.timer.time, this.text);
+      this._model.completeGame(data, this.timer.time);
       this.end.emit(this.timer.time);
       this.timer.reset();
     } else {
-      this._model.onProgress(data);
+      this._model.onProgress(data, this.timer.time);
       if (this.text.indexOf(data) !== 0) {
         this._renderer.setElementClass(this.gameContainer.nativeElement, 'wrong', true);
       } else {

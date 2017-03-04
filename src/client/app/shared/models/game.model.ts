@@ -22,8 +22,8 @@ export class GameModel extends Model {
     this._store.dispatch(GameActions.startGame());
   }
 
-  onProgress(text: string) {
-    this.performAsyncAction(GameActions.gameProgress(text, new Date()))
+  onProgress(text: string, time: number) {
+    this.performAsyncAction(GameActions.gameProgress(text, time))
       .subscribe(() => {
         // Do nothing, we're all good
       }, () => {
@@ -31,9 +31,10 @@ export class GameModel extends Model {
       });
   }
 
-  completeGame(time: number, text: string) {
-    this._store.dispatch(GameActions.completeGame(time, text));
-    this.performAsyncAction(GameActions.completeGame(new Date(), text))
+  completeGame(text: string, time: number) {
+    const action = GameActions.completeGame(text, time);
+    this._store.dispatch(action);
+    this.performAsyncAction(action)
       .subscribe(
         () => console.log('Done!'),
         () => console.log('Done cheating!')
